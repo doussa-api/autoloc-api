@@ -1,10 +1,7 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -27,4 +24,10 @@ public class Maintenance {
 
     @Column(length = 255)
     private String description;
+
+    // ===== ASSOCIATION =====
+    // Plusieurs maintenances concernent un seul véhicule
+    @ManyToOne
+    Vehicule vehicule;
+
 }

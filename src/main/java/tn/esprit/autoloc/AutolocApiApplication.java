@@ -22,14 +22,52 @@ public class AutolocApiApplication {
     CommandLineRunner initDemoData(VehiculeRepository vehiculeRepository) {
         return args -> {
             if (vehiculeRepository.count() == 0) {
-                Vehicule v1 = new Vehicule(null, "TUN-1234", "Peugeot", "208",
-                        CategorieVehicule.CITADINE, new BigDecimal("60.00"), StatutVehicule.DISPONIBLE);
 
-                Vehicule v2 = new Vehicule(null, "TUN-5678", "Volkswagen", "Golf",
-                        CategorieVehicule.BERLINE, new BigDecimal("85.00"), StatutVehicule.DISPONIBLE);
+                // ✅ Constructeur avec 11 arguments :
+                // idVehicule, immatriculation, marque, modele, categorie,
+                // tarifJournalier, statut, agence, maintenances, reservations, equipements
 
-                Vehicule v3 = new Vehicule(null, "TUN-9012", "Toyota", "RAV4",
-                        CategorieVehicule.SUV, new BigDecimal("120.00"), StatutVehicule.MAINTENANCE);
+                Vehicule v1 = new Vehicule(
+                        null,                              // idVehicule
+                        "TUN-1234",                        // immatriculation
+                        "Peugeot",                         // marque
+                        "208",                             // modele
+                        CategorieVehicule.CITADINE,        // categorie
+                        new BigDecimal("60.00"),           // tarifJournalier
+                        StatutVehicule.DISPONIBLE,         // statut
+                        null,                              // agence
+                        null,                              // maintenances
+                        null,                              // reservations
+                        null                               // equipements
+                );
+
+                Vehicule v2 = new Vehicule(
+                        null,
+                        "TUN-5678",
+                        "Volkswagen",
+                        "Golf",
+                        CategorieVehicule.BERLINE,
+                        new BigDecimal("85.00"),
+                        StatutVehicule.DISPONIBLE,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                Vehicule v3 = new Vehicule(
+                        null,
+                        "TUN-9012",
+                        "Toyota",
+                        "RAV4",
+                        CategorieVehicule.SUV,
+                        new BigDecimal("120.00"),
+                        StatutVehicule.MAINTENANCE,
+                        null,
+                        null,
+                        null,
+                        null
+                );
 
                 vehiculeRepository.save(v1);
                 vehiculeRepository.save(v2);

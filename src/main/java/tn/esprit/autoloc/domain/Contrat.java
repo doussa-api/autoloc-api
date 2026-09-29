@@ -1,13 +1,11 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "contrat")
@@ -29,4 +27,14 @@ public class Contrat {
 
     @Column(nullable = false)
     private boolean valide;
+
+    // ===== ASSOCIATIONS =====
+
+    // Un contrat correspond à une seule réservation (côté propriétaire)
+    @OneToOne
+    Reservation reservation;
+
+    // Un contrat peut avoir plusieurs paiements (côté 1)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contrat")
+    private List<Paiement> paiements;
 }

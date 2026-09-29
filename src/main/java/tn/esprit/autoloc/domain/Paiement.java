@@ -1,10 +1,8 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import tn.esprit.autoloc.domain.ModePaiement;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,4 +28,8 @@ public class Paiement {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private ModePaiement modePaiement;
+
+    // ===== ASSOCIATION =====
+    @ManyToOne
+    Contrat contrat;
 }

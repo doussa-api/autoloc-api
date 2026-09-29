@@ -1,10 +1,9 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "agence")
@@ -29,4 +28,14 @@ public class Agence {
 
     @Column(nullable = false, length = 20)
     private String telephone;
+
+    // ===== ASSOCIATIONS (style cours bidirectionnel) =====
+
+    // Une agence a plusieurs employés
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agence")
+    private List<Employee> employees;
+
+    // Une agence a plusieurs véhicules
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agence")
+    private List<Vehicule> vehicules;
 }

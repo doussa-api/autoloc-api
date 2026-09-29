@@ -1,10 +1,8 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import tn.esprit.autoloc.domain.StatutReservation;
 
 import java.time.LocalDate;
 
@@ -29,4 +27,18 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutReservation statut;
+
+    // ===== ASSOCIATIONS =====
+
+    // Une réservation concerne un seul client
+    @ManyToOne
+    Client client;
+
+    // Une réservation concerne un seul véhicule
+    @ManyToOne
+    Vehicule vehicule;
+
+    // Une réservation donne lieu à un seul contrat (côté inverse du OneToOne)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "reservation")
+    Contrat contrat;
 }

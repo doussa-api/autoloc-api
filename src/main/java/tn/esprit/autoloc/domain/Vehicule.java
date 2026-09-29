@@ -1,12 +1,12 @@
 package tn.esprit.autoloc.domain;
 
-import jakarta.persistence .*;
-import lombok.AllArgsConstructor;
-import lombok. Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import tn.esprit.autoloc.domain.CategorieVehicule;
+import tn.esprit.autoloc.domain.StatutVehicule;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "vehicule")
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class Vehicule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType. IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idVehicule;
 
     @Column(nullable = false, unique = true, length = 20)
@@ -40,4 +40,24 @@ public class Vehicule {
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
 
+    // ===== ASSOCIATIONS =====
+
+    @ManyToOne
+    Agence agence;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    private List<Maintenance> maintenances;
+
+    // ✅ NOUVEAU : un véhicule peut être réservé plusieurs fois
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    private List<Reservation> reservations;
+
+    // ✅ NOUVEAU : relation ManyToMany avec Equipement
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "vehicule_equipement",
+            joinColumns = @JoinColumn(name = "vehicule_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipement_id")
+    )
+    private List<Equipement> equipements;
 }
