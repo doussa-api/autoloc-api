@@ -2,7 +2,6 @@ package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import tn.esprit.autoloc.domain.ModePaiement;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,6 +29,8 @@ public class Paiement {
     private ModePaiement modePaiement;
 
     // ===== ASSOCIATION =====
-    @ManyToOne
-    Contrat contrat;
+    // Plusieurs paiements appartiennent à un seul contrat
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contrat_id", nullable = false)
+    private Contrat contrat;
 }

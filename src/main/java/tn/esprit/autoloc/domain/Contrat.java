@@ -31,8 +31,9 @@ public class Contrat {
     // ===== ASSOCIATIONS =====
 
     // Un contrat correspond à une seule réservation (côté propriétaire)
-    @OneToOne
-    Reservation reservation;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id", nullable = false, unique = true)
+    private Reservation reservation;
 
     // Un contrat peut avoir plusieurs paiements (côté 1)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contrat")

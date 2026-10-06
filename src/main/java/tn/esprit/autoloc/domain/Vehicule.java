@@ -2,8 +2,6 @@ package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import tn.esprit.autoloc.domain.CategorieVehicule;
-import tn.esprit.autoloc.domain.StatutVehicule;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -42,8 +40,10 @@ public class Vehicule {
 
     // ===== ASSOCIATIONS =====
 
-    @ManyToOne
-    Agence agence;
+    // Un véhicule appartient à une seule agence
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agence_id", nullable = false)
+    private Agence agence;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
     private List<Maintenance> maintenances;
@@ -60,4 +60,5 @@ public class Vehicule {
             inverseJoinColumns = @JoinColumn(name = "equipement_id")
     )
     private List<Equipement> equipements;
+
 }

@@ -2,7 +2,6 @@ package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import tn.esprit.autoloc.domain.RoleEmploye;
 
 @Entity
 @Table(name = "employee")
@@ -27,6 +26,8 @@ public class Employee {
     private RoleEmploye role;
 
     // ===== ASSOCIATION =====
-    @ManyToOne
-    Agence agence;
+    // Plusieurs employés appartiennent à une seule agence
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agence_id", nullable = false)
+    private Agence agence;
 }

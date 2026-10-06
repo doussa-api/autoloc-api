@@ -27,7 +27,8 @@ public class Maintenance {
 
     // ===== ASSOCIATION =====
     // Plusieurs maintenances concernent un seul véhicule
-    @ManyToOne
-    Vehicule vehicule;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicule_id", nullable = false)
+    private Vehicule vehicule;
 
 }
