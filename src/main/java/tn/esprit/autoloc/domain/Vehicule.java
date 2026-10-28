@@ -1,5 +1,7 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,14 +44,17 @@ public class Vehicule {
 
     // Un véhicule appartient à une seule agence
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agence_id", nullable = false)
+    @JoinColumn(name = "agence_id", nullable = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "vehicules", "employees"})
     private Agence agence;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    @JsonIgnore
     private List<Maintenance> maintenances;
 
     // ✅ NOUVEAU : un véhicule peut être réservé plusieurs fois
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     // ✅ NOUVEAU : relation ManyToMany avec Equipement
@@ -59,6 +64,7 @@ public class Vehicule {
             joinColumns = @JoinColumn(name = "vehicule_id"),
             inverseJoinColumns = @JoinColumn(name = "equipement_id")
     )
+    @JsonIgnore
     private List<Equipement> equipements;
 
 }

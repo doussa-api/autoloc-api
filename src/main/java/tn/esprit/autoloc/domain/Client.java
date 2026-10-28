@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,5 +39,6 @@ public class Client {
 
     // ===== ASSOCIATION =====
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    @JsonIgnore
     private List<Reservation> reservations;
 }

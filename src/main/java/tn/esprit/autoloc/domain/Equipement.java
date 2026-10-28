@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,6 @@ public class Equipement {
     // ===== ASSOCIATION =====
     // Côté inverse : c'est Vehicule qui possède la @JoinTable
     @ManyToMany(mappedBy = "equipements")
+    @JsonIgnore
     private List<Vehicule> vehicules;
 }

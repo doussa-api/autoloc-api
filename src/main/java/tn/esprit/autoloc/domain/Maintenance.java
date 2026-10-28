@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,6 +30,7 @@ public class Maintenance {
     // Plusieurs maintenances concernent un seul véhicule
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicule_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "maintenances", "reservations", "equipements"})
     private Vehicule vehicule;
 
 }

@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/contrat"
+method: GET
+auth:
+  type: basic
+  credentials:
+    username: ferdaous
+    password: FERdoussa@123
+scripts:
+  - type: afterResponse
+    code: ' pm.test("Statut 200", () => pm.response.to.have.status(200));'
+    language: text/javascript
+examples: .resources/lister_contrats.resources/examples
+order: 1000

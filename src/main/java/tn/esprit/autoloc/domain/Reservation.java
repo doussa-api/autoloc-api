@@ -1,5 +1,7 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,14 +34,17 @@ public class Reservation {
     // Une réservation concerne un seul client
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "reservations"})
     private Client client;
 
     // Une réservation concerne un seul véhicule
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicule_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "reservations", "maintenances", "equipements"})
     private Vehicule vehicule;
 
     // Une réservation donne lieu à un seul contrat (côté inverse du OneToOne)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "reservation")
+    @JsonIgnore
     private Contrat contrat;
 }

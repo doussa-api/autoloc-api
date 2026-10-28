@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,6 @@ public class Employee {
     // Plusieurs employés appartiennent à une seule agence
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agence_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "employees", "vehicules"})
     private Agence agence;
 }
