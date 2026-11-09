@@ -1,12 +1,13 @@
 package tn.esprit.autoloc.service;
 
+import tn.esprit.autoloc.dto.PaiementDTO;
+
 import java.util.List;
-import tn.esprit.autoloc.domain.Paiement;
 
 public interface IPaiementService {
-    Paiement create(Paiement paiement);
-    Paiement findById(Long id);
-    List<Paiement> findAll();
-    Paiement update(Long id, Paiement paiement);
+    PaiementDTO create(PaiementDTO paiementDTO);
+    PaiementDTO findById(Long id);
+    List<PaiementDTO> findAll();
+    PaiementDTO update(Long id, PaiementDTO paiementDTO);
     void deleteById(Long id);
 }

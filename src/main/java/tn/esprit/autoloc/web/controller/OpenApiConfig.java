@@ -21,7 +21,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("AutoLoc API")
-                        .description("API REST de gestion de location de véhicules — Atelier 5 ASI 26-27")
+                        .description("API REST de gestion de location de véhicules — DTO, Validation & Gestion centralisée des erreurs")
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("UP ASI — ESPRIT")

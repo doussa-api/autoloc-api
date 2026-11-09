@@ -1,9 +1,10 @@
 package tn.esprit.autoloc.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.autoloc.domain.Equipement;
+import tn.esprit.autoloc.dto.EquipementDTO;
 import tn.esprit.autoloc.service.IEquipementService;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class EquipementController {
 
     // GET /api/equipements
     @GetMapping
-    public List<Equipement> findAll() {
+    public List<EquipementDTO> findAll() {
         return equipementService.findAll();
     }
 
     // GET /api/equipements/{id}
     @GetMapping("/{id}")
-    public Equipement findById(@PathVariable Long id) {
+    public EquipementDTO findById(@PathVariable Long id) {
         return equipementService.findById(id);
     }
 
     // POST /api/equipements
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Equipement create(@RequestBody Equipement equipement) {
-        return equipementService.create(equipement);
+    public EquipementDTO create(@Valid @RequestBody EquipementDTO equipementDTO) {
+        return equipementService.create(equipementDTO);
     }
 
     // PUT /api/equipements/{id}
     @PutMapping("/{id}")
-    public Equipement update(@PathVariable Long id, @RequestBody Equipement equipement) {
-        return equipementService.update(id, equipement);
+    public EquipementDTO update(@PathVariable Long id, @Valid @RequestBody EquipementDTO equipementDTO) {
+        return equipementService.update(id, equipementDTO);
     }
 
     // DELETE /api/equipements/{id}

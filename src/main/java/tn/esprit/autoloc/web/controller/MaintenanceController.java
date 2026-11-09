@@ -1,9 +1,10 @@
 package tn.esprit.autoloc.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.autoloc.domain.Maintenance;
+import tn.esprit.autoloc.dto.MaintenanceDTO;
 import tn.esprit.autoloc.service.IMaintenanceService;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class MaintenanceController {
 
     // GET /api/maintenances
     @GetMapping
-    public List<Maintenance> findAll() {
+    public List<MaintenanceDTO> findAll() {
         return maintenanceService.findAll();
     }
 
     // GET /api/maintenances/{id}
     @GetMapping("/{id}")
-    public Maintenance findById(@PathVariable Long id) {
+    public MaintenanceDTO findById(@PathVariable Long id) {
         return maintenanceService.findById(id);
     }
 
-    // POST /api/maintenances  – body must include vehicule by id
+    // POST /api/maintenances
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Maintenance create(@RequestBody Maintenance maintenance) {
-        return maintenanceService.create(maintenance);
+    public MaintenanceDTO create(@Valid @RequestBody MaintenanceDTO maintenanceDTO) {
+        return maintenanceService.create(maintenanceDTO);
     }
 
     // PUT /api/maintenances/{id}
     @PutMapping("/{id}")
-    public Maintenance update(@PathVariable Long id, @RequestBody Maintenance maintenance) {
-        return maintenanceService.update(id, maintenance);
+    public MaintenanceDTO update(@PathVariable Long id, @Valid @RequestBody MaintenanceDTO maintenanceDTO) {
+        return maintenanceService.update(id, maintenanceDTO);
     }
 
     // DELETE /api/maintenances/{id}

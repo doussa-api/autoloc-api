@@ -1,9 +1,10 @@
 package tn.esprit.autoloc.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.autoloc.domain.Agence;
+import tn.esprit.autoloc.dto.AgenceDTO;
 import tn.esprit.autoloc.service.IAgenceService;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class AgenceController {
 
     // GET /api/agences
     @GetMapping
-    public List<Agence> findAll() {
+    public List<AgenceDTO> findAll() {
         return agenceService.findAll();
     }
 
     // GET /api/agences/{id}
     @GetMapping("/{id}")
-    public Agence findById(@PathVariable Long id) {
+    public AgenceDTO findById(@PathVariable Long id) {
         return agenceService.findById(id);
     }
 
     // POST /api/agences
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Agence create(@RequestBody Agence agence) {
-        return agenceService.create(agence);
+    public AgenceDTO create(@Valid @RequestBody AgenceDTO agenceDTO) {
+        return agenceService.create(agenceDTO);
     }
 
     // PUT /api/agences/{id}
     @PutMapping("/{id}")
-    public Agence update(@PathVariable Long id, @RequestBody Agence agence) {
-        return agenceService.update(id, agence);
+    public AgenceDTO update(@PathVariable Long id, @Valid @RequestBody AgenceDTO agenceDTO) {
+        return agenceService.update(id, agenceDTO);
     }
 
     // DELETE /api/agences/{id}

@@ -1,9 +1,10 @@
 package tn.esprit.autoloc.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.autoloc.domain.Reservation;
+import tn.esprit.autoloc.dto.ReservationDTO;
 import tn.esprit.autoloc.service.IReservationService;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class ReservationController {
 
     // GET /api/reservations
     @GetMapping
-    public List<Reservation> findAll() {
+    public List<ReservationDTO> findAll() {
         return reservationService.findAll();
     }
 
     // GET /api/reservations/{id}
     @GetMapping("/{id}")
-    public Reservation findById(@PathVariable Long id) {
+    public ReservationDTO findById(@PathVariable Long id) {
         return reservationService.findById(id);
     }
 
-    // POST /api/reservations  – body must include client and vehicule by id
+    // POST /api/reservations
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation create(@RequestBody Reservation reservation) {
-        return reservationService.create(reservation);
+    public ReservationDTO create(@Valid @RequestBody ReservationDTO reservationDTO) {
+        return reservationService.create(reservationDTO);
     }
 
     // PUT /api/reservations/{id}
     @PutMapping("/{id}")
-    public Reservation update(@PathVariable Long id, @RequestBody Reservation reservation) {
-        return reservationService.update(id, reservation);
+    public ReservationDTO update(@PathVariable Long id, @Valid @RequestBody ReservationDTO reservationDTO) {
+        return reservationService.update(id, reservationDTO);
     }
 
     // DELETE /api/reservations/{id}

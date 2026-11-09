@@ -1,9 +1,10 @@
 package tn.esprit.autoloc.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.autoloc.domain.Vehicule;
+import tn.esprit.autoloc.dto.VehiculeDTO;
 import tn.esprit.autoloc.service.IVehiculeService;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class VehiculeController {
 
     // GET /api/vehicules
     @GetMapping
-    public List<Vehicule> findAll() {
+    public List<VehiculeDTO> findAll() {
         return vehiculeService.findAll();
     }
 
     // GET /api/vehicules/{id}
     @GetMapping("/{id}")
-    public Vehicule findById(@PathVariable Long id) {
+    public VehiculeDTO findById(@PathVariable Long id) {
         return vehiculeService.findById(id);
     }
 
-    // POST /api/vehicules  – agence can be referenced as {"agence":{"idAgence":1}}
+    // POST /api/vehicules
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Vehicule create(@RequestBody Vehicule vehicule) {
-        return vehiculeService.create(vehicule);
+    public VehiculeDTO create(@Valid @RequestBody VehiculeDTO vehiculeDTO) {
+        return vehiculeService.create(vehiculeDTO);
     }
 
     // PUT /api/vehicules/{id}
     @PutMapping("/{id}")
-    public Vehicule update(@PathVariable Long id, @RequestBody Vehicule vehicule) {
-        return vehiculeService.update(id, vehicule);
+    public VehiculeDTO update(@PathVariable Long id, @Valid @RequestBody VehiculeDTO vehiculeDTO) {
+        return vehiculeService.update(id, vehiculeDTO);
     }
 
     // DELETE /api/vehicules/{id}
